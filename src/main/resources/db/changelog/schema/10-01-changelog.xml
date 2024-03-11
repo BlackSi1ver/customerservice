@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.24.xsd">
+    
+    <changeSet id="insert-users" author="sergey">
+        <insert tableName="users">
+            <column name="name">user1</column>
+            <column name="password">$2a$10$G7oYzgHfwlMh8bZ2gFlOHOCY/HqQek3a.X5HHt3viRA4YUeg0AZxG</column>
+            <column name="roles">{"USER"}</column>
+        </insert>
+
+        <insert tableName="users">
+            <column name="name">oper1</column>
+            <column name="password">$2a$10$PeDj5Hwp.LWA4ITu0.08cuRxYgz5o5wsq9rzSDemnZnR.cRUf1pBG</column>
+            <column name="roles">{"USER","OPERATOR"}</column>
+        </insert>
+
+        <insert tableName="users">
+            <column name="name">admin1</column>
+            <column name="password">$2a$10$YhUJVMRlgOSIj4zrr1woMO8264DsGfuAoUXid/0VqYfGNrl0ks67u</column>
+            <column name="roles">{"USER","ADMIN"}</column>
+        </insert>
+
+        <insert tableName="claims">
+            <column name="username">user1</column>
+            <column name="phone">7111111111</column>
+            <column name="request">request1</column>
+            <column name="status">DRAFT</column>
+            <column name="created_at">2024-03-10 19:50:00.000</column>
+        </insert>
+        <insert tableName="claims">
+            <column name="username">user1</column>
+            <column name="phone">7111111112</column>
+            <column name="request">request2</column>
+            <column name="status">SENT</column>
+            <column name="created_at">2024-03-10 19:52:00.000</column>
+        </insert>
+        <insert tableName="claims">
+            <column name="username">user1</column>
+            <column name="phone">7111111113</column>
+            <column name="request">request3</column>
+            <column name="status">REJECTED</column>
+            <column name="created_at">2024-03-10 19:53:00.000</column>
+        </insert>
+        <insert tableName="claims">
+            <column name="username">user1</column>
+            <column name="phone">7111111114</column>
+            <column name="request">request4</column>
+            <column name="status">RECEIVED</column>
+            <column name="created_at">2024-03-10 19:54:00.000</column>
+        </insert>
+        <insert tableName="claims">
+            <column name="username">user1</column>
+            <column name="phone">7111111115</column>
+            <column name="request">request5</column>
+            <column name="status">DRAFT</column>
+            <column name="created_at">2024-03-10 19:55:00.000</column>
+        </insert>
+
+        <insert tableName="claims">
+            <column name="username">user1</column>
+            <column name="phone">7111111116</column>
+            <column name="request">request6</column>
+            <column name="status">SENT</column>
+            <column name="created_at">2024-03-10 19:56:00.000</column>
+        </insert>
+        <insert tableName="claims">
+            <column name="username">user1</column>
+            <column name="phone">7111111117</column>
+            <column name="request">request7</column>
+            <column name="status">RECEIVED</column>
+            <column name="created_at">2024-03-10 19:57:00.000</column>
+        </insert>
+        <insert tableName="claims">
+            <column name="username">user1</column>
+            <column name="phone">7111111118</column>
+            <column name="request">request8</column>
+            <column name="status">REJECTED</column>
+            <column name="created_at">2024-03-10 19:58:00.000</column>
+        </insert>
+        <insert tableName="claims">
+            <column name="username">user1</column>
+            <column name="phone">7111111119</column>
+            <column name="request">request9</column>
+            <column name="status">DRAFT</column>
+            <column name="created_at">2024-03-10 19:59:00.000</column>
+        </insert>
+        <insert tableName="claims">
+            <column name="username">user1</column>
+            <column name="phone">7111111120</column>
+            <column name="request">request10</column>
+            <column name="status">SENT</column>
+            <column name="created_at">2024-03-10 20:00:00.000</column>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>
