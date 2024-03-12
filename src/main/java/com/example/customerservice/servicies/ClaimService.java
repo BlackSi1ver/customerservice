@@ -13,6 +13,8 @@ public class ClaimService {
     private ModelMapper modelMapper;
 
     public ClaimDto convertToDto(final ClaimEntry claimEntry) {
-        return modelMapper.map(claimEntry, ClaimDto.class);
+        final ClaimDto claimDto = modelMapper.map(claimEntry, ClaimDto.class);
+        claimDto.setUsername(claimEntry.getUser().getName());
+        return claimDto;
     }
 }

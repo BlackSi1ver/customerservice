@@ -530,6 +530,7 @@ class CustomerServiceApplicationTests {
 		assertTrue(result.size() > 0);
 		assertEquals(actual.size(), result.size());
 		assertTrue(result.equals(actual));
+		assertTrue(result.stream().allMatch(dto -> dto.getUsername().equals(USER_NAME)));
 
 		// Check ASC mode
 		getResponse = restTemplate.exchange(
