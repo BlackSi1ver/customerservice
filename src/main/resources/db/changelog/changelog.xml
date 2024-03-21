@@ -5,59 +5,96 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.24.xsd">
 
-    <changeSet author="sergey" id="1710086097438-1">
-        <createTable tableName="users">
-            <column autoIncrement="true" name="id" startWith="39" type="BIGINT">
-                <constraints nullable="false" />
-            </column>
-            <column name="name" type="VARCHAR(255)">
-                <constraints nullable="false" primaryKey="true" primaryKeyName="users_pkey"/>
-            </column>
-            <column name="password" type="VARCHAR(255)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="roles" type="VARCHAR[]"/>
-        </createTable>
-    </changeSet>
-
-    <changeSet author="sergey" id="1710086097438-2">
+    <changeSet author="sergey" id="1711022180655-1">
         <createTable tableName="claims">
-            <column autoIncrement="true" name="id" startWith="135" type="BIGINT">
+            <column name="id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="claims_pkey"/>
             </column>
-            <column name="city" type="INTEGER"/>
-            <column name="country" type="INTEGER"/>
             <column name="created_at" type="TIMESTAMP WITHOUT TIME ZONE">
                 <constraints nullable="false"/>
             </column>
-            <column name="phone" type="VARCHAR(20)">
-                <constraints nullable="false"/>
-            </column>
+            <column name="city" type="INTEGER"/>
+            <column name="country" type="INTEGER"/>
+            <column name="phone_number" type="VARCHAR(255)"/>
             <column name="request" type="VARCHAR(255)"/>
             <column name="status" type="VARCHAR(8)">
                 <constraints nullable="false"/>
             </column>
-            <column name="username" type="VARCHAR(255)">
+            <column name="version" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="sergey" id="1711022180655-2">
+        <createTable tableName="users">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="users_pkey"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="roles" type="VARCHAR[]">
                 <constraints nullable="false"/>
             </column>
         </createTable>
     </changeSet>
 
-    <changeSet author="sergey" id="1710149267443-4">
-        <addForeignKeyConstraint
-                baseColumnNames="username"
-                baseTableName="claims"
-                constraintName="fk_username"
-                deferrable="false"
-                initiallyDeferred="false"
-                onDelete="CASCADE"
-                onUpdate="RESTRICT"
-                referencedColumnNames="name"
-                referencedTableName="users"
-                validate="true"
-        />
+    <changeSet author="sergey" id="1711022180655-3">
+        <createTable tableName="passwords">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="passwords_pkey"/>
+            </column>
+            <column name="password" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="BIGINT"/>
+        </createTable>
     </changeSet>
 
-    <includeAll path="db/changelog/schema" />
+    <changeSet author="sergey" id="1711022510252-4">
+        <addUniqueConstraint
+                columnNames="name" constraintName="uk_3g1j96g94xpk3lpxl2qbl985x" tableName="users"/>
+    </changeSet>
+
+    <changeSet author="sergey" id="1711022510252-5">
+        <addUniqueConstraint
+                columnNames="user_id" constraintName="uk_54jt41jgbqn75uqdvpbslvosf" tableName="passwords"/>
+    </changeSet>
+
+    <changeSet author="sergey" id="1711022510252-6">
+        <createSequence
+                cacheSize="1" cycle="false" dataType="bigint" incrementBy="50" maxValue="9223372036854775807" minValue="1"
+                sequenceName="claims_seq" startValue="1"/>
+    </changeSet>
+
+    <changeSet author="sergey" id="1711022510252-7">
+        <createSequence
+                cacheSize="1" cycle="false" dataType="bigint" incrementBy="50" maxValue="9223372036854775807" minValue="1"
+                sequenceName="passwords_seq" startValue="1"/>
+    </changeSet>
+
+    <changeSet author="sergey" id="1711022510252-8">
+        <createSequence
+                cacheSize="1" cycle="false" dataType="bigint" incrementBy="50" maxValue="9223372036854775807" minValue="1"
+                sequenceName="users_seq" startValue="1"/>
+    </changeSet>
+
+    <changeSet author="sergey" id="1711022510252-9">
+        <addForeignKeyConstraint
+                baseColumnNames="user_id" baseTableName="claims" constraintName="fkpa11rhvbu0t3yoouw2m6k15ic" deferrable="false"
+                initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+                referencedColumnNames="id" referencedTableName="users" validate="true"/>
+    </changeSet>
+
+    <changeSet author="sergey" id="1711022510252-10">
+        <addForeignKeyConstraint
+                baseColumnNames="user_id" baseTableName="passwords" constraintName="fkqiupw3oqiukdfyc45xvoky044" deferrable="false"
+                initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+                referencedColumnNames="id" referencedTableName="users" validate="true"/>
+    </changeSet>
+
+    <includeAll path="db/changelog/schema"/>
 
 </databaseChangeLog>
